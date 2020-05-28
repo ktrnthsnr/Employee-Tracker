@@ -13,7 +13,7 @@ https://github.com/ktrnthsnr/Employee-Tracker
 * [Contribution](#contribution)
 
 ## Description
-The exercise focuses on the connection from a server within the Express.js framework to a front-end application already created by a local zoo. Heroku will be used to deploy the server to a live URL.
+Command-line application to manage a company's employee database.
 
 ## Installations
 - If cloning to your repository, to setup please follow these instructions:
