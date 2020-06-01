@@ -6,7 +6,7 @@ If $ node app.js does not work, here are somethings to try
 Troubleshooting error and fixes:
 
 * Error 1: Cannot find module 'mysql2'
--------------------------------
+-----------------------------------------
 Sample fix:
         -- after already installing globally: $ npm install -g mysql 
         -- Also run this, but first exist from all mysql command prompts
@@ -17,14 +17,7 @@ Sample fix:
                           "mysql2": "^2.1.0"
 
         
-* Error 2: PORT error
--------------------------------
-Sample fix
-1. netstat -ano | findstr :3301
-2. taskkill /PID 5824 /F
-
-
-* Error 3: Error: connect ECONNREFUSED 127.0.0.1:3307
+* Error 2: Error: connect ECONNREFUSED 127.0.0.1:3307
 -------------------------------
     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1141:16) {
   errno: 'ECONNREFUSED',
