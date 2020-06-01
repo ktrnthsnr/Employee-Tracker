@@ -42,6 +42,7 @@ This repos contains a command-line application to manage a company's employee da
 
 - Run the application within the terminal
 - $ npm start
+- - ![invokeapp](./img/invokeapp.jpg "Start application")
 
 ## Technology
 Node.js, npm, Inquirer, MySQL, MySQL2, JavaScript, ES6, HTML, CSS
@@ -53,12 +54,12 @@ by typing:     mysql -u root -p    in your command line, then add your MySQL pas
 - Check the database and tables were created by running int he mysql command line,
 * mysql> USE employeetracker_db; show tables; describe department; describe role; describe employee;
 - You should see this result
-![showtables](./img/showtables.jpg "Show tables")
+- ![showtables](./img/showtables.jpg "Show tables")
 
 - Check the tables after seeding by running in the mysql command line,
 * mysql> select * from department; select * from role; select * from employee;
 - You should see this result
-![selecttables](./img/selecttables.jpg "Select tables")
+- ![selecttables](./img/selecttables.jpg "Select tables")
 
 ## Contribution
 ktrnthsnr
