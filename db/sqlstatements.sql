@@ -55,5 +55,5 @@ SET role_id = 3 WHERE last_name in ('Celsuis');
 
 -- b
 UPDATE employee
-SET role_id= 7 WHERE last_name in ('Lamarr');
+SET role_id = 1 WHERE last_name in ('Lamarr');
 

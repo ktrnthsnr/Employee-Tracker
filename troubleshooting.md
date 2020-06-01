@@ -8,7 +8,8 @@ Troubleshooting error and fixes:
 * Error 1: Cannot find module 'mysql2'
 -----------------------------------------
 Sample fix:
-        -- after already installing globally: $ npm install -g mysql 
+        -- after already installing globally: 
+        -- $ npm install -g mysql 
         -- Also run this, but first exist from all mysql command prompts
         -- $ npm install mysql2 --save
         -- verify installed in package.json
