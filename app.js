@@ -32,7 +32,17 @@ const connection = mysql.createConnection({
             choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role']
         }
     ])
-    .then(answers => console.log(answers));
+    // .then(answers => console.log(answers));
+
+    .then(answers => {
+       const { sqlStatement } = answers;
+        if(sqlStatement == 'View All Departments') {
+            viewAllDept();
+        }
+        else {
+            endDbConnection();
+        }
+    });
 };
  
 // const here(){
