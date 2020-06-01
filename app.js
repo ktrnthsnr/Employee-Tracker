@@ -17,6 +17,7 @@ const connection = mysql.createConnection({
  connection.connect(err => {
      if (err) throw err;
      console.log('connected as id ' + connection.threadId + '\n');
+     console.log("Employee Tracker:");
      // -- call first function, user prompt
      promptUser();
  });
@@ -29,15 +30,34 @@ const connection = mysql.createConnection({
             type: 'list',
             name: 'sqlStatement',
             message: 'What would you like to do?',
-            choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role']
+            choices: ['View All Departments', 'View All Roles', 'View All Employees', 
+            'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role']
         }
     ])
     // .then(answers => console.log(answers));
 
     .then(answers => {
        const { sqlStatement } = answers;
-        if(sqlStatement == 'View All Departments') {
+        if (sqlStatement == 'View All Departments') {
             viewAllDept();
+        }
+        else if (sqlStatement == 'View All Roles') {
+            viewAllRole();
+        }
+        else if (sqlStatement == 'View All Employees') {
+            viewAllEmployee();
+        }
+        else if (sqlStatement == 'Add a Department') {
+            viewAllEmployee();  //placeholder
+        }
+        else if (sqlStatement == 'Add a Role') {
+            viewAllEmployee(); //placeholder
+        }
+        else if (sqlStatement == 'Add an Employee') {
+            viewAllEmployee(); //placeholder
+        }
+        else if (sqlStatement == 'Update an Employee role') {
+            viewAllEmployee(); //placeholder
         }
         else {
             endDbConnection();
@@ -45,42 +65,12 @@ const connection = mysql.createConnection({
     });
 };
  
-// const here(){
-//     console.log("here");
-// }   
-
 
 // -- function calls 
-
-// viewAllDept();
 
 // promptUser()
 // .then(answers => console.log(answers));
 // .then(viewAllDept);
-
-// if (answers == 'View All Departments'){
-//     return viewAllDept()
-// } else endDbConnection();
-
-
-// .then(viewAllDept => {
-//     console.log(viewAllDept);    
-// })
-// .catch(err => {
-//     console.log(err);
-// })
-
-//-- test db connection
-
-// -- to do: add array and if\else conditionals to call these functions
-    // .then(answers => console.log(answers));
-    // if answer = [0] .then viewAllDept()
-    // else if answer = [1] .then viewAllRole()
-    // else if answer = [2] .then viewAllEmployee()
-    // else if answer = [3] .then addDept()
-    // else if answer = [4] .then addRole()
-    // else if answer = [5] .then addEmployee()
-    // else if answer = [6] .then updateEmployeeRole()
 
 
 viewAllDept = () => {
@@ -94,7 +84,7 @@ viewAllDept = () => {
         // -- next function() call;
 // -- testing 
 // endDbConnection();
-    //    promptUser();
+       promptUser();
 };
 
 viewAllRole = () => {
