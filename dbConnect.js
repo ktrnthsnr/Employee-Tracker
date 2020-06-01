@@ -12,12 +12,15 @@
  // -- to invoke application, run $ node app.js
 
  const mysql = require('mysql2');
+ const env = require('./env');
+
+//  console.log(mysqlpassword);
 
  // connection to database
  const connection = mysql.createConnection({
    host: 'localhost',
    user: 'root',
-   password: '',
+   password: env.password,
    database: 'employeetracker_db'
  });
  
