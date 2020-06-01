@@ -48,16 +48,16 @@ const connection = mysql.createConnection({
             viewAllEmployee();
         }
         else if (sqlStatement == 'Add a Department') {
-            viewAllEmployee();  //placeholder
+            addDept();  
         }
         else if (sqlStatement == 'Add a Role') {
-            viewAllEmployee(); //placeholder
+            addRole(); 
         }
         else if (sqlStatement == 'Add an Employee') {
-            viewAllEmployee(); //placeholder
+            addEmployee(); 
         }
         else if (sqlStatement == 'Update an Employee role') {
-            viewAllEmployee(); //placeholder
+            updateEmployee(); 
         }
         else {
             endDbConnection();
@@ -74,7 +74,7 @@ const connection = mysql.createConnection({
 
 
 viewAllDept = () => {
-    console.log('Selecting all products...\n');
+    console.log('Selecting all departments...\n');
     connection.query(
     'SELECT * from department;',
        function(err, results) {
@@ -88,7 +88,7 @@ viewAllDept = () => {
 };
 
 viewAllRole = () => {
-    console.log('Selecting all products...\n');
+    console.log('Selecting all roles...\n');
     connection.query(
     'SELECT * from role;',   
        function(err, results) {
@@ -100,7 +100,7 @@ viewAllRole = () => {
 };
 
 viewAllEmployee = () => {
-    console.log('Selecting all products...\n');
+    console.log('Selecting all employees...\n');
     connection.query(
     'SELECT * from employee;',   
        function(err, results) {
@@ -111,8 +111,63 @@ viewAllEmployee = () => {
    promptUser();
 };
 
-// -- to do: add other 4 functions.. 
+addDept = () => {
+    console.log('Adding a department...\n');
+    connection.query(
+    'INSERT INTO department SET ?',   
+    {
+        dept_name: 'Testing',   //placeholder
+    },
+    function(err, res) {
+        if (err) throw err;
+        console.log(' || Added: ' + res.affectedRows + ' a new department!\n');
+    }
+   );
+    // -- next function() call;
+   promptUser();
+};
 
+addRole = () => {
+    console.log('Adding a role...\n');
+    connection.query(
+        'INSERT INTO role SET ?',   
+        {
+            title: 'BusinessAnalyst',
+            salary: 60000,             //placeholder
+            department_id: 4
+        },
+        function(err, res) {
+            if (err) throw err;
+            console.log(' || Added: ' + res.affectedRows + ' a  new role!\n');
+        }
+       );
+        // -- next function() call;
+       promptUser();
+};
+
+addEmployee = () => {
+    console.log('Adding an employee...\n');
+    connection.query(
+        'SELECT * from employee;',   //placeholder
+           function(err, results) {
+            console.log(results);
+        }
+       );
+        // -- next function() call;
+       promptUser();
+};
+
+updateEmployee = () => {
+    console.log('Updating an employee...\n');
+    connection.query(
+    'SELECT * from employee;',   //placeholder
+       function(err, results) {
+        console.log(results);
+    }
+   );
+    // -- next function() call;
+   promptUser();
+};
 
 
 // -- end db connection
