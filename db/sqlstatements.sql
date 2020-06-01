@@ -20,12 +20,40 @@ SELECT * FROM role;
 -- // view all employees
 SELECT * FROM employee;
 
--- // add a department
--- UPDATE 
+-- // add a department -- samples for user responses
+INSERT INTO department (dept_name)
+VALUES ('Testing');
 
--- // add a role
+INSERT INTO department (dept_name)
+VALUES ('Sales');
 
--- // add an employee
+-- // add a role -- samples for user responses
 
--- // update an employee role
+INSERT INTO role (title, salary, department_id)
+VALUES
+('BusinessAnalyst', 60000, 4);
+
+INSERT INTO role (title, salary, department_id)
+VALUES
+('ProgramManager', 110000, 1);
+
+-- // add an employee -- samples for user responses
+-- a
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES
+('Anders', 'Celsuis', 2);
+
+-- b
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES
+('Hedy', 'Lamarr', 5);
+ 
+-- // update an employee role -- samples for user responses
+-- a
+UPDATE employee
+SET role_id = 3 WHERE last_name in ('Celsuis');
+
+-- b
+UPDATE employee
+SET role_id= 7 WHERE last_name in ('Lamarr');
 
