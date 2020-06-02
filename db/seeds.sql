@@ -48,9 +48,13 @@ VALUES
 UPDATE employee
 SET manager_id = 1 WHERE last_name in ('Mercury', 'Ulvaeus');
 
+-- validate seeded
+select * from department; 
+select * from role; 
+select * from employee;
 
 -- checks\other statements:
------------------------------
+-- ---------------------------
 -- SELECT * FROM employee;
 -- TRUNCATE TABLE employee;
 -- SHOW CREATE TABLE employee;

@@ -57,3 +57,144 @@ SET role_id = 3 WHERE last_name in ('Celsuis');
 UPDATE employee
 SET role_id = 1 WHERE last_name in ('Lamarr');
 
+-- bonus queries
+
+-- Bonus
+-- 		○ Update employee managers.
+DELETE FROM 
+-- 		○ View employees by manager.
+-- 		○ View employees by department.
+-- 		○ Delete departments, roles, and employees.
+-- 		○ View the total utilized budget of a department—i.e., the combined salaries of all employees in that department.
+
+
+
+----------- ## Usage
+
+--   1) Start the MySQL command line, and when prompted, enter your pwd
+
+--              mysql -u root -p              
+
+--   2) Create the database, tables and seed them
+
+--              mysql> source ./db/schema.sql
+
+--              mysql> source ./db/seeds.sql
+
+--   3) Check the database and tables were created by running int he mysql command line
+
+--              mysql> USE employeetracker_db; show tables; describe department; describe role; describe employee;
+
+--      Check the tables after seeding by running in the mysql command line,
+
+--              mysql> select * from department; select * from role; select * from employee;
+
+
+show tables;
+
+--  Tables_in_employeetracker_db |
+-- +------------------------------+
+-- | department                   |
+-- | employee                     |
+-- | role                         |
+-- +------------------------------+
+
+describe department; describe role; describe employee;
+
+-- mysql> describe department; describe role; describe employee;
+-- +-----------+-------------+------+-----+---------+----------------+
+-- | Field     | Type        | Null | Key | Default | Extra          |
+-- +-----------+-------------+------+-----+---------+----------------+
+-- | id        | int         | NO   | PRI | NULL    | auto_increment |
+-- | dept_name | varchar(30) | YES  |     | NULL    |                |
+-- +-----------+-------------+------+-----+---------+----------------+
+-- 2 rows in set (0.07 sec)
+
+-- +---------------+---------------+------+-----+---------+----------------+
+-- | Field         | Type          | Null | Key | Default | Extra          |
+-- +---------------+---------------+------+-----+---------+----------------+
+-- | id            | int           | NO   | PRI | NULL    | auto_increment |
+-- | title         | varchar(30)   | YES  |     | NULL    |                |
+-- | salary        | decimal(10,0) | YES  |     | NULL    |                |
+-- | department_id | int           | YES  | MUL | NULL    |                |
+-- +---------------+---------------+------+-----+---------+----------------+
+-- 4 rows in set (0.01 sec)
+
+-- +------------+-------------+------+-----+---------+----------------+
+-- | Field      | Type        | Null | Key | Default | Extra          |
+-- +------------+-------------+------+-----+---------+----------------+
+-- | id         | int         | NO   | PRI | NULL    | auto_increment |
+-- | first_name | varchar(30) | YES  |     | NULL    |                |
+-- | last_name  | varchar(30) | YES  |     | NULL    |                |
+-- | role_id    | int         | YES  | MUL | NULL    |                |
+-- | manager_id | int         | YES  | MUL | NULL    |                |
+-- +------------+-------------+------+-----+---------+----------------+
+-- 5 rows in set (0.00 sec)
+
+select * from department; select * from role; select * from employee;
+
+-- mysql> select * from department; select * from role; select * from employee;
+-- +----+---------------------+
+-- | id | dept_name           |
+-- +----+---------------------+
+-- |  1 | Management          |
+-- |  2 | SoftwareDevelopment |
+-- |  3 | Engineering         |
+-- |  4 | Operations          |
+-- |  5 | Networking          |
+-- |  6 | Testing             |
+-- |  7 | Testing             |
+-- |  8 | Testing             |
+-- |  9 | Testing             |
+-- | 10 | Testing             |
+-- | 11 | Testing             |
+-- | 12 | Testing             |
+-- | 13 | Testing             |
+-- | 14 | Testing             |
+-- +----+---------------------+
+-- 14 rows in set (0.01 sec)
+
+-- +----+------------------+--------+---------------+
+-- | id | title            | salary | department_id |
+-- +----+------------------+--------+---------------+
+-- |  1 | Manager          | 110000 |             1 |
+-- |  2 | WebDev           | 120000 |             2 |
+-- |  3 | Engineer         |  90000 |             3 |
+-- |  4 | Tester           |  85000 |             2 |
+-- |  5 | SQLDev           | 120000 |             2 |
+-- |  6 | SQLDBA           |  90000 |             4 |
+-- |  7 | NetEng           |  90000 |             5 |
+-- |  8 | Analyst          |  50000 |             4 |
+-- |  9 | BusinessAnalystv |  60000 |             4 |
+-- | 10 | BusinessAnalyst  |  60000 |             4 |
+-- | 11 | BusinessAnalyst  |  60000 |             4 |
+-- | 12 | BusinessAnalyst  |  60000 |             4 |
+-- | 13 | BusinessAnalyst  |  60000 |             4 |
+-- | 14 | BusinessAnalyst  |  60000 |             4 |
+-- | 15 | BusinessAnalyst  |  60000 |             4 |
+-- | 16 | BusinessAnalyst  |  60000 |             4 |
+-- +----+------------------+--------+---------------+
+-- 16 rows in set (0.00 sec)
+
+-- +----+------------+-----------+---------+------------+
+-- | id | first_name | last_name | role_id | manager_id |
+-- +----+------------+-----------+---------+------------+
+-- |  1 | Freddie    | Mercury   |       1 |          1 |
+-- |  2 | Ed         | Sheeran   |       2 |       NULL |
+-- |  3 | Tito       | Puente    |       3 |       NULL |
+-- |  4 | Celia      | Cruz      |       4 |       NULL |
+-- |  5 | Marvin     | Gaye      |       2 |       NULL |
+-- |  6 | Jimi       | Hendrix   |       3 |       NULL |
+-- |  7 | Janis      | Joplin    |       4 |       NULL |
+-- |  8 | Billy      | Holiday   |       5 |       NULL |
+-- |  9 | Benny      | Andersson |       6 |       NULL |
+-- | 10 | Anni-Frid  | Lyngstad  |       7 |       NULL |
+-- | 11 | Agnetha    | Faltskog  |       8 |       NULL |
+-- | 12 | Bjorn      | Ulvaeus   |       1 |          1 |
+-- | 13 | Anders     | Celsuis   |       2 |       NULL |
+-- | 14 | Hedy       | Lamarr    |       5 |       NULL |
+-- | 15 | Hedy       | Lamarr    |       5 |       NULL |
+-- | 16 | Hedy       | Lamarr    |       5 |       NULL |
+-- | 17 | Hedy       | Lamarr    |       5 |       NULL |
+-- +----+------------+-----------+---------+------------+
+-- 17 rows in set (0.00 sec)

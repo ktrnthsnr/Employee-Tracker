@@ -66,3 +66,8 @@ CREATE TABLE employee (
         REFERENCES employee(id)
     );
 
+-- validate tables created
+show tables;
+describe department; 
+describe role; 
+describe employee;

@@ -174,7 +174,7 @@ updateEmployee = () => {
         if (error){
             return console.error(error.message);
           }
-          console.log('| Updated: ' + results.affectedRows + 'new employee!\n');
+          console.log('| Updated: ' + results.affectedRows + ' new employee!\n');
     });
     // -- next function() call;
     promptUser();
