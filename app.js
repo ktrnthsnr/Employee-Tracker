@@ -3,7 +3,7 @@
 
 // -- Inquirer prompt
 const mysql = require('mysql2');
-const env = require('./env');
+const env = require('./env');   // custom module to hold mysql password
 var inquirer = require('inquirer');
 
 // connection to database
