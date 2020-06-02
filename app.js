@@ -31,7 +31,7 @@ const connection = mysql.createConnection({
             name: 'sqlStatement',
             message: 'What would you like to do?',
             choices: ['View All Departments', 'View All Roles', 'View All Employees', 
-            'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role', 'Quit']
+            'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role', 'Budget by Dept', 'Quit']
         }
     ])
     // .then(answers => console.log(answers));
@@ -58,6 +58,9 @@ const connection = mysql.createConnection({
         }
         else if (sqlStatement == 'Update an Employee role') {
             updateEmployee(); 
+        }
+        else if (sqlStatement == 'Budget by Dept') {
+            budgetByDept(); 
         }
         else if (sqlStatement == 'Quit') {
             endDbConnection(); 
@@ -180,6 +183,17 @@ updateEmployee = () => {
     promptUser();
 };
 
+budgetByDept = () => {
+    console.log('Selecting budget by dept...\n');
+    connection.query(
+    'SELECT d.dept_name, SUM(r.salary) FROM employee e INNER JOIN role r ON e.role_id=r.id INNER JOIN department d ON r.department_id=d.id GROUP BY d.dept_name;',   
+       function(err, results) {
+        console.log(results);
+    }
+   );
+    // -- next function() call;
+   promptUser();
+};
 
 // -- end db connection
  endDbConnection = () => {

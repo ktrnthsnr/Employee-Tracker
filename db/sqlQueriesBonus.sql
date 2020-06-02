@@ -84,6 +84,10 @@ ORDER BY e.id;
 -- +----+------------+-----------+---------+------------+---------------------+
 -- 13 rows in set (0.00 sec)
 
+-- (2) group by
+
+
+
 ---------------------------- 	○ Delete departments, roles, and employees.
 
 -- deletes all
