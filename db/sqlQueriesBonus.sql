@@ -102,54 +102,7 @@ DELETE FROM department WHERE id = 1;
 
 ----------------------------	○ View the total utilized budget of a department—i.e., the combined salaries of all employees in that department.
 
--- joining 2 tables
-SELECT 
--- r.id as roleid, 
--- e.role_id as employeeroleid, 
-r.salary,
-d.dept_name,
-e.*
-FROM employee e
-INNER JOIN role r ON
-    e.role_id=r.id
-INNER JOIN department d ON
-    r.department_id=d.id
-ORDER BY e.id;
-
--- (1) get salary
--- mysql> SELECT
---     -> -- r.id as roleid,
---     -> -- e.role_id as employeeroleid,
---     -> r.salary,                       -- added salary column
---     -> d.dept_name,
---     -> e.*
---     -> FROM employee e
---     -> INNER JOIN role r ON
---     ->     e.role_id=r.id
---     -> INNER JOIN department d ON
---     ->     r.department_id=d.id
---     -> ORDER BY e.id;
--- +--------+---------------------+----+------------+-----------+---------+------------+
--- | salary | dept_name           | id | first_name | last_name | role_id | manager_id |
--- +--------+---------------------+----+------------+-----------+---------+------------+
--- | 110000 | Management          |  1 | Freddie    | Mercury   |       1 |          1 |
--- | 120000 | SoftwareDevelopment |  2 | Ed         | Sheeran   |       2 |       NULL |
--- |  90000 | Engineering         |  3 | Tito       | Puente    |       3 |       NULL |
--- |  85000 | SoftwareDevelopment |  4 | Celia      | Cruz      |       4 |       NULL |
--- | 120000 | SoftwareDevelopment |  5 | Marvin     | Gaye      |       2 |       NULL |
--- |  90000 | Engineering         |  6 | Jimi       | Hendrix   |       3 |       NULL |
--- |  85000 | SoftwareDevelopment |  7 | Janis      | Joplin    |       4 |       NULL |
--- | 120000 | SoftwareDevelopment |  8 | Billy      | Holiday   |       5 |       NULL |
--- |  90000 | Operations          |  9 | Benny      | Andersson |       6 |       NULL |
--- |  90000 | Networking          | 10 | Anni-Frid  | Lyngstad  |       7 |       NULL |
--- |  50000 | Operations          | 11 | Agnetha    | Faltskog  |       8 |       NULL |
--- | 110000 | Management          | 12 | Bjorn      | Ulvaeus   |       1 |          1 |
--- | 120000 | SoftwareDevelopment | 15 | Hedy       | Lamarr    |       5 |          1 |
--- +--------+---------------------+----+------------+-----------+---------+------------+
--- 13 rows in set (0.00 sec)
-
--- (2) group by 
-
+-- (1) joining 2 tables
 SELECT 
 e.*,
 r.salary,
@@ -159,6 +112,73 @@ INNER JOIN role r ON
     e.role_id=r.id
 INNER JOIN department d ON
     r.department_id=d.id
--- GROUP BY r.salary,e.role_id;
 ORDER BY e.id;
 
+
+-- mysql> SELECT
+--     -> e.*,
+--     -> r.salary,
+--     -> d.dept_name
+--     -> FROM employee e
+--     -> INNER JOIN role r ON
+--     ->     e.role_id=r.id
+--     -> INNER JOIN department d ON
+--     ->     r.department_id=d.id
+--     -> ORDER BY e.id;
+-- +----+------------+-----------+---------+------------+--------+---------------------+
+-- | id | first_name | last_name | role_id | manager_id | salary | dept_name           |
+-- +----+------------+-----------+---------+------------+--------+---------------------+
+-- |  1 | Freddie    | Mercury   |       1 |          1 | 110000 | Management          |
+-- |  2 | Ed         | Sheeran   |       2 |       NULL | 120000 | SoftwareDevelopment |
+-- |  3 | Tito       | Puente    |       3 |       NULL |  90000 | Engineering         |
+-- |  4 | Celia      | Cruz      |       4 |       NULL |  85000 | SoftwareDevelopment |
+-- |  5 | Marvin     | Gaye      |       2 |       NULL | 120000 | SoftwareDevelopment |
+-- |  6 | Jimi       | Hendrix   |       3 |       NULL |  90000 | Engineering         |
+-- |  7 | Janis      | Joplin    |       4 |       NULL |  85000 | SoftwareDevelopment |
+-- |  8 | Billy      | Holiday   |       5 |       NULL | 120000 | SoftwareDevelopment |
+-- |  9 | Benny      | Andersson |       6 |       NULL |  90000 | Operations          |
+-- | 10 | Anni-Frid  | Lyngstad  |       7 |       NULL |  90000 | Networking          |
+-- | 11 | Agnetha    | Faltskog  |       8 |       NULL |  50000 | Operations          |
+-- | 12 | Bjorn      | Ulvaeus   |       1 |          1 | 110000 | Management          |
+-- | 15 | Hedy       | Lamarr    |       5 |          1 | 120000 | SoftwareDevelopment |
+-- +----+------------+-----------+---------+------------+--------+---------------------+
+-- 13 rows in set (0.00 sec)
+
+-- (2) group by 
+
+SELECT 
+-- e.*,
+SUM(r.salary),
+d.dept_name
+FROM employee e
+INNER JOIN role r ON
+    e.role_id=r.id
+INNER JOIN department d ON
+    r.department_id=d.id
+GROUP BY r.salary
+ORDER BY r.salary, d.dept_name asc;
+
+-- mysql> SELECT
+--     -> -- e.*,
+--     -> SUM(r.salary),
+--     -> d.dept_name
+--     -> FROM employee e
+--     -> INNER JOIN role r ON
+--     ->     e.role_id=r.id
+--     -> INNER JOIN department d ON
+--     ->     r.department_id=d.id
+--     -> GROUP BY r.salary
+--     -> ORDER BY r.salary, d.dept_name asc;
+
+
+    --- combined salaries of all employees in that department
+-- +---------------+---------------------+
+-- | SUM(r.salary) | dept_name           |
+-- +---------------+---------------------+
+-- |         50000 | Operations          |
+-- |        170000 | SoftwareDevelopment |
+-- |        360000 | Engineering         |
+-- |        220000 | Management          |
+-- |        480000 | SoftwareDevelopment |
+-- +---------------+---------------------+
+-- 5 rows in set (0.01 sec)
