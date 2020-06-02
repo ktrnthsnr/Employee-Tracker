@@ -38,38 +38,32 @@ VALUES
 ('ProgramManager', 110000, 1);
 
 -- // add an employee -- samples for user responses
--- a
+-- sample a
 INSERT INTO employee (first_name, last_name, role_id)
 VALUES
 ('Anders', 'Celsuis', 2);
 
--- b
+-- sample b
 INSERT INTO employee (first_name, last_name, role_id)
 VALUES
 ('Hedy', 'Lamarr', 5);
  
 -- // update an employee role -- samples for user responses
--- a
+-- sample a
 UPDATE employee
 SET role_id = 3 WHERE last_name in ('Celsuis');
 
--- b
+-- sample b
 UPDATE employee
 SET role_id = 1 WHERE last_name in ('Lamarr');
 
--- bonus queries
 
--- Bonus
--- 		○ Update employee managers.
-DELETE FROM 
--- 		○ View employees by manager.
--- 		○ View employees by department.
--- 		○ Delete departments, roles, and employees.
--- 		○ View the total utilized budget of a department—i.e., the combined salaries of all employees in that department.
+-- Delete an employee
+DELETE FROM employee WHERE last_name in ('Lamarr'); 
 
 
 
------------ ## Usage
+----------- Usage
 
 --   1) Start the MySQL command line, and when prompted, enter your pwd
 
@@ -134,6 +128,8 @@ describe department; describe role; describe employee;
 select * from department; select * from role; select * from employee;
 
 -- mysql> select * from department; select * from role; select * from employee;
+
+-- dept
 -- +----+---------------------+
 -- | id | dept_name           |
 -- +----+---------------------+
@@ -143,17 +139,8 @@ select * from department; select * from role; select * from employee;
 -- |  4 | Operations          |
 -- |  5 | Networking          |
 -- |  6 | Testing             |
--- |  7 | Testing             |
--- |  8 | Testing             |
--- |  9 | Testing             |
--- | 10 | Testing             |
--- | 11 | Testing             |
--- | 12 | Testing             |
--- | 13 | Testing             |
--- | 14 | Testing             |
--- +----+---------------------+
--- 14 rows in set (0.01 sec)
 
+-- role
 -- +----+------------------+--------+---------------+
 -- | id | title            | salary | department_id |
 -- +----+------------------+--------+---------------+
@@ -165,17 +152,9 @@ select * from department; select * from role; select * from employee;
 -- |  6 | SQLDBA           |  90000 |             4 |
 -- |  7 | NetEng           |  90000 |             5 |
 -- |  8 | Analyst          |  50000 |             4 |
--- |  9 | BusinessAnalystv |  60000 |             4 |
--- | 10 | BusinessAnalyst  |  60000 |             4 |
--- | 11 | BusinessAnalyst  |  60000 |             4 |
--- | 12 | BusinessAnalyst  |  60000 |             4 |
--- | 13 | BusinessAnalyst  |  60000 |             4 |
--- | 14 | BusinessAnalyst  |  60000 |             4 |
--- | 15 | BusinessAnalyst  |  60000 |             4 |
--- | 16 | BusinessAnalyst  |  60000 |             4 |
--- +----+------------------+--------+---------------+
--- 16 rows in set (0.00 sec)
+-- |  9 | BusinessAnalyst  |  60000 |             4 |
 
+-- employee
 -- +----+------------+-----------+---------+------------+
 -- | id | first_name | last_name | role_id | manager_id |
 -- +----+------------+-----------+---------+------------+
@@ -193,8 +172,5 @@ select * from department; select * from role; select * from employee;
 -- | 12 | Bjorn      | Ulvaeus   |       1 |          1 |
 -- | 13 | Anders     | Celsuis   |       2 |       NULL |
 -- | 14 | Hedy       | Lamarr    |       5 |       NULL |
--- | 15 | Hedy       | Lamarr    |       5 |       NULL |
--- | 16 | Hedy       | Lamarr    |       5 |       NULL |
--- | 17 | Hedy       | Lamarr    |       5 |       NULL |
--- +----+------------+-----------+---------+------------+
--- 17 rows in set (0.00 sec)
+
+
