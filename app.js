@@ -31,7 +31,7 @@ const connection = mysql.createConnection({
             name: 'sqlStatement',
             message: 'What would you like to do?',
             choices: ['View All Departments', 'View All Roles', 'View All Employees', 
-            'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role']
+            'Add a Department', 'Add a Role',  'Add an Employee', 'Update an Employee role', 'Quit']
         }
     ])
     // .then(answers => console.log(answers));
@@ -59,8 +59,8 @@ const connection = mysql.createConnection({
         else if (sqlStatement == 'Update an Employee role') {
             updateEmployee(); 
         }
-        else {
-            endDbConnection();
+        else if (sqlStatement == 'Quit') {
+            endDbConnection(); 
         }
     });
 };
@@ -148,9 +148,15 @@ addRole = () => {
 addEmployee = () => {
     console.log('Adding an employee...\n');
     connection.query(
-        'SELECT * from employee;',   //placeholder
-           function(err, results) {
-            console.log(results);
+        'INSERT INTO employee SET ?',   
+        {
+            first_name: 'Hedy',
+            last_name: 'Lamarr',             //placeholder
+            role_id: 2
+        },
+        function(err, res) {
+            if (err) throw err;
+            console.log(' || Added: ' + res.affectedRows + ' a  new employee!\n');
         }
        );
         // -- next function() call;
@@ -159,20 +165,23 @@ addEmployee = () => {
 
 updateEmployee = () => {
     console.log('Updating an employee...\n');
-    connection.query(
-    'SELECT * from employee;',   //placeholder
-       function(err, results) {
-        console.log(results);
-    }
-   );
+    // -- update SQL statement
+    let sql =   `UPDATE employee
+                SET role_id = ?
+                WHERE last_name = ?`;
+    let data = [5, 'Lamarr'];
+    connection.query(sql, data, (error, results, fields) => {
+        if (error){
+            return console.error(error.message);
+          }
+          console.log('| Updated: ' + results.affectedRows + 'new employee!\n');
+    });
     // -- next function() call;
-   promptUser();
+    promptUser();
 };
 
 
 // -- end db connection
-
  endDbConnection = () => {
-    // -- end the connection
  connection.end();
  };
