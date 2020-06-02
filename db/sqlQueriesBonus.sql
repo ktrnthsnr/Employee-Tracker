@@ -148,37 +148,32 @@ ORDER BY e.id;
 
 SELECT 
 -- e.*,
-SUM(r.salary),
-d.dept_name
+d.dept_name,
+SUM(r.salary)
 FROM employee e
 INNER JOIN role r ON
     e.role_id=r.id
 INNER JOIN department d ON
     r.department_id=d.id
-GROUP BY r.salary
-ORDER BY r.salary, d.dept_name asc;
+GROUP BY d.dept_name;
+-- ORDER BY r.salary, d.dept_name asc;
 
 -- mysql> SELECT
 --     -> -- e.*,
---     -> SUM(r.salary),
---     -> d.dept_name
+--     -> d.dept_name,
+--     -> SUM(r.salary)
 --     -> FROM employee e
 --     -> INNER JOIN role r ON
 --     ->     e.role_id=r.id
 --     -> INNER JOIN department d ON
 --     ->     r.department_id=d.id
---     -> GROUP BY r.salary
---     -> ORDER BY r.salary, d.dept_name asc;
-
-
-    --- combined salaries of all employees in that department
--- +---------------+---------------------+
--- | SUM(r.salary) | dept_name           |
--- +---------------+---------------------+
--- |         50000 | Operations          |
--- |        170000 | SoftwareDevelopment |
--- |        360000 | Engineering         |
--- |        220000 | Management          |
--- |        480000 | SoftwareDevelopment |
--- +---------------+---------------------+
--- 5 rows in set (0.01 sec)
+--     -> GROUP BY d.dept_name;
+-- +---------------------+---------------+
+-- | dept_name           | SUM(r.salary) |
+-- +---------------------+---------------+
+-- | Management          |        220000 |
+-- | SoftwareDevelopment |        650000 |
+-- | Engineering         |        180000 |
+-- | Operations          |        140000 |
+-- | Networking          |         90000 |
+-- +---------------------+---------------+
