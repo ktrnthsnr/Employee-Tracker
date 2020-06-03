@@ -5,6 +5,7 @@
 const mysql = require('mysql2');
 const env = require('./env');   // custom module to hold mysql password
 var inquirer = require('inquirer');
+const cTable = require('console.table');
 
 // connection to database
 const connection = mysql.createConnection({
@@ -81,7 +82,7 @@ viewAllDept = () => {
     connection.query(
     'SELECT * from department;',
        function(err, results) {
-         console.log(results);
+         console.table(results);
         }
        );
         // -- next function() call;
@@ -95,7 +96,7 @@ viewAllRole = () => {
     connection.query(
     'SELECT * from role;',   
        function(err, results) {
-        console.log(results);
+        console.table(results);
     }
    );
     // -- next function() call;
@@ -107,7 +108,7 @@ viewAllEmployee = () => {
     connection.query(
     'SELECT * from employee;',   
        function(err, results) {
-        console.log(results);
+        console.table(results);
     }
    );
     // -- next function() call;
@@ -123,7 +124,7 @@ addDept = () => {
     },
     function(err, res) {
         if (err) throw err;
-        console.log(' || Added: ' + res.affectedRows + ' a new department!\n');
+        console.table(' || Added: ' + res.affectedRows + ' a new department!\n');
     }
    );
     // -- next function() call;
@@ -141,7 +142,7 @@ addRole = () => {
         },
         function(err, res) {
             if (err) throw err;
-            console.log(' || Added: ' + res.affectedRows + ' a  new role!\n');
+            console.table(' || Added: ' + res.affectedRows + ' a  new role!\n');
         }
        );
         // -- next function() call;
@@ -159,7 +160,7 @@ addEmployee = () => {
         },
         function(err, res) {
             if (err) throw err;
-            console.log(' || Added: ' + res.affectedRows + ' a  new employee!\n');
+            console.table(' || Added: ' + res.affectedRows + ' a  new employee!\n');
         }
        );
         // -- next function() call;
@@ -177,7 +178,7 @@ updateEmployee = () => {
         if (error){
             return console.error(error.message);
           }
-          console.log('| Updated: ' + results.affectedRows + ' new employee!\n');
+          console.table('| Updated: ' + results.affectedRows + ' new employee!\n');
     });
     // -- next function() call;
     promptUser();
@@ -188,7 +189,7 @@ budgetByDept = () => {
     connection.query(
     'SELECT d.dept_name, SUM(r.salary) FROM employee e INNER JOIN role r ON e.role_id=r.id INNER JOIN department d ON r.department_id=d.id GROUP BY d.dept_name;',   
        function(err, results) {
-        console.log(results);
+        console.table(results);
     }
    );
     // -- next function() call;

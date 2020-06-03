@@ -29,8 +29,7 @@ This repo contains a simplified content management system (CMS) through a comman
 - $ npm install -g mysql
 - $ npm install mysql2 --save
 - Install console.table to print MySQL in console
-- npm install console.table --save
-- bower install console.table --save
+- $ npm install console.table --save
 
 ## Usage
 - Within the VSCode terminal, start MySQL
@@ -39,7 +38,7 @@ This repo contains a simplified content management system (CMS) through a comman
 
 - Create the database, tables and seed the tables
 -   mysql> source ./db/schema.sql
--   mysql> source ./db/seeds.sql
+-   mysql> c
 
 - Run the application within the terminal
 - $ npm start
