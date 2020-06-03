@@ -39,10 +39,13 @@ This repo contains a simplified content management system (CMS) through a comman
 - Create the database, tables and seed the tables
 -   mysql> source ./db/schema.sql
 -   mysql> source ./db/seeds.sql
-
+-
 - Run the application within the terminal
-- $ npm start
+-   $ npm start
 - ![invokeapp](./img/invokeapp.jpg "Start application")
+-
+- View how to invoke the app in the command-line and the queries behind them:
+https://drive.google.com/file/d/1PDtzf94vUY6thJZZBh_offyvXtGPE1Zn/view
 
 ## Technology
 Node.js, npm, Inquirer, MySQL, MySQL2, JavaScript, ES6, HTML, CSS
