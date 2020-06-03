@@ -38,7 +38,7 @@ This repo contains a simplified content management system (CMS) through a comman
 
 - Create the database, tables and seed the tables
 -   mysql> source ./db/schema.sql
--   mysql> c
+-   mysql> source ./db/seeds.sql
 
 - Run the application within the terminal
 - $ npm start
