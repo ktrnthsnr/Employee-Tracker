@@ -17,7 +17,7 @@ This repo contains a simplified content management system (CMS) through a comman
 
 ## Installations
 - If cloning to your repository, to setup please follow these instructions:
-- Prereq: install VSCode, Node.js
+- Prereq: install VSCode, Node.js, and MySQL http://dev.mysql.com/downloads/
 - After cloning the GitHub repo to your local drive, run the following in the VSCode command-line terminal
 - Install npm
 - $ npm init -y
@@ -39,12 +39,10 @@ This repo contains a simplified content management system (CMS) through a comman
 - Create the database, tables and seed the tables
 -   mysql> source ./db/schema.sql
 -   mysql> source ./db/seeds.sql
--
 - Run the application within the terminal
 -   $ npm start
 - ![invokeapp](./img/invokeapp.jpg "Start application")
--
-- View how to invoke the app in the command-line and the queries behind them:
+- View how to invoke the app on the terminal command-line and afterwards view the queries:
 https://drive.google.com/file/d/1PDtzf94vUY6thJZZBh_offyvXtGPE1Zn/view
 
 ## Technology

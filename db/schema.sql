@@ -1,14 +1,3 @@
------------ ## Usage
---   1) Start the MySQL command line, and when prompted, enter your pwd
---              mysql -u root -p               
---   2) Create the database, tables and seed them
---              mysql> source ./db/schema.sql
---              mysql> source ./db/seeds.sql
---   3) Check the database and tables were created by running int he mysql command line
---              mysql> USE employeetracker_db; show tables; describe department; describe role; describe employee;
---      Check the tables after seeding by running in the mysql command line,
---              mysql> select * from department; select * from role; select * from employee;
-
 DROP DATABASE IF EXISTS employeetracker_db;
 CREATE DATABASE employeetracker_db;
 USE employeetracker_db;
@@ -17,6 +6,7 @@ DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS department;
 
+USE employeetracker_db;
 
 -- (1) DEPARTMENT - First table, ran ok (no foreign keys)
 CREATE TABLE department (

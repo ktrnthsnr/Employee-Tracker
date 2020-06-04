@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
      if (err) throw err;
      console.log('connected as id ' + connection.threadId + '\n');
      console.log("Employee Tracker:");
-     // -- call first function, user prompt
+     // -- call first function, user list prompt
      promptUser();
  });
 
@@ -72,11 +72,6 @@ const connection = mysql.createConnection({
 
 // -- function calls 
 
-// promptUser()
-// .then(answers => console.log(answers));
-// .then(viewAllDept);
-
-
 viewAllDept = () => {
     console.log('Selecting all departments...\n');
     connection.query(
@@ -117,18 +112,41 @@ viewAllEmployee = () => {
 
 addDept = () => {
     console.log('Adding a department...\n');
-    connection.query(
-    'INSERT INTO department SET ?',   
-    {
-        dept_name: 'Testing',   //placeholder
-    },
-    function(err, res) {
-        if (err) throw err;
-        console.table(' || Added: ' + res.affectedRows + ' a new department!\n');
-    }
-   );
-    // -- next function() call;
-   promptUser();
+    // -- add inquirer prompt and then sections
+    return inquirer .prompt([
+        {
+            type: 'input',
+            name: 'deptName',
+            message: 'What department would you like to add?',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a new department name:');
+                    return false;
+                }
+            }        
+        }
+    ])
+    // .then(answer => console.log(answer));
+    .then(answers => {
+        // const { sqlStatement } = answers;
+
+        let sql =   `INSERT INTO department (dept_name)
+                    VALUES (?)`;
+        let data =  answers.deptName;
+        
+        connection.query(sql, data, (error, results, fields) => {
+            if (error){
+                return console.error(error.message);
+              }
+              console.table('| Updated: ' + results.affectedRows + ' new dept!\n');
+              viewAllDept();
+        });
+        // -- next function() call
+        promptUser();
+    })
 };
 
 addRole = () => {
