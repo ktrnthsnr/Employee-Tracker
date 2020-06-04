@@ -145,7 +145,7 @@ addDept = () => {
               viewAllDept();
         });
         // -- next function() call
-        promptUser();
+        // promptUser();
     })
 };
 
@@ -215,7 +215,7 @@ addRole = () => {
               viewAllRole();
         });
         // -- next function() call
-        promptUser();
+        // promptUser();
     })
 };
 
@@ -237,22 +237,92 @@ addRole = () => {
         // };
 
 addEmployee = () => {
-    console.log('Adding an employee...\n');
-    connection.query(
-        'INSERT INTO employee SET ?',   
+    console.log('Adding a role...\n');
+    // -- add inquirer prompt and then sections
+    return inquirer .prompt([
         {
-            first_name: 'Hedy',
-            last_name: 'Lamarr',             //placeholder
-            role_id: 2
+            type: 'input',
+            name: 'firstName',
+            message: 'What is the first name of the employee?',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the first name:');
+                    return false;
+                }
+            }
         },
-        function(err, res) {
-            if (err) throw err;
-            console.table(' || Added: ' + res.affectedRows + ' a  new employee!\n');
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'What is the last name of the employee?',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the last name:');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'roleId',
+            message: 'In which role will the employee have? Enter the RoleID:',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {                    
+                    console.log('Please enter the Role ID:');
+                    return false;
+                }
+            }
         }
-       );
-        // -- next function() call;
-       promptUser();
+    ])
+    // .then(answer => console.log(answer));
+    .then(answers => {
+        let sql =   `INSERT INTO employee
+                    (
+                        first_name, 
+                        last_name, 
+                        role_id
+                    ) VALUES 
+                    (?, ?, ?)`;
+        let data =  [answers.firstName, answers.lastName, answers.roleId];
+        
+        connection.query(sql, data, (error, results, fields) => {
+            if (error){
+                return console.error(error.message);
+              }
+              console.table('| Updated: ' + results.affectedRows + ' new employee!\n');
+              viewAllEmployee();
+        });
+        // -- next function() call
+        // promptUser();
+    })
 };
+
+// -- placeholder script
+        //     console.log('Adding an employee...\n');
+        //     connection.query(
+        //         'INSERT INTO employee SET ?',   
+        //         {
+        //             first_name: 'Hedy',
+        //             last_name: 'Lamarr',             //placeholder
+        //             role_id: 2
+        //         },
+        //         function(err, res) {
+        //             if (err) throw err;
+        //             console.table(' || Added: ' + res.affectedRows + ' a  new employee!\n');
+        //         }
+        //        );
+        //         // -- next function() call;
+        //        promptUser();
+        // };
 
 updateEmployee = () => {
     console.log('Updating an employee...\n');
