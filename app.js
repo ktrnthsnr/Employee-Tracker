@@ -126,7 +126,7 @@ addDept = () => {
                     console.log('Please enter a new department name:');
                     return false;
                 }
-            }        
+            }
         }
     ])
     // .then(answer => console.log(answer));
@@ -151,21 +151,90 @@ addDept = () => {
 
 addRole = () => {
     console.log('Adding a role...\n');
-    connection.query(
-        'INSERT INTO role SET ?',   
+    // -- add inquirer prompt and then sections
+    return inquirer .prompt([
         {
-            title: 'BusinessAnalyst',
-            salary: 60000,             //placeholder
-            department_id: 4
+            type: 'input',
+            name: 'deptRole',
+            message: 'What role would you like to add?',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a new role name:');
+                    return false;
+                }
+            }
         },
-        function(err, res) {
-            if (err) throw err;
-            console.table(' || Added: ' + res.affectedRows + ' a  new role!\n');
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is the salary of this new role?',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the salary amount only numbers no commas:');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'deptId',
+            message: 'In which department is the role? Enter the Dept ID:',
+            // -- validation
+            validate: deptNameInput => {
+                if (deptNameInput) {
+                    return true;
+                } else {                    
+                    console.log('Please enter the Dept ID for the role:');
+                    return false;
+                }
+            }
         }
-       );
-        // -- next function() call;
-       promptUser();
+    ])
+    // .then(answer => console.log(answer));
+    .then(answers => {
+        let sql =   `INSERT INTO role
+                    (
+                        title, 
+                        salary, 
+                        department_id
+                    ) VALUES 
+                    (?, ?, ?)`;
+        let data =  [answers.deptRole, answers.salary, answers.deptId];
+        
+        connection.query(sql, data, (error, results, fields) => {
+            if (error){
+                return console.error(error.message);
+              }
+              console.table('| Updated: ' + results.affectedRows + ' new role!\n');
+              viewAllRole();
+        });
+        // -- next function() call
+        promptUser();
+    })
 };
+
+// -- placeholder 
+        //     connection.query(
+        //         'INSERT INTO role SET ?',   
+        //         {
+        //             title: 'BusinessAnalyst',
+        //             salary: 60000,             //placeholder
+        //             department_id: 4
+        //         },
+        //         function(err, res) {
+        //             if (err) throw err;
+        //             console.table(' || Added: ' + res.affectedRows + ' a  new role!\n');
+        //         }
+        //        );
+        //         // -- next function() call;
+        //        promptUser();
+        // };
 
 addEmployee = () => {
     console.log('Adding an employee...\n');
