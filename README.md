@@ -30,6 +30,9 @@ This repo contains a simplified content management system (CMS) through a comman
 - $ npm install mysql2 --save
 - Install console.table to print MySQL in console
 - $ npm install console.table --save
+- Install npm Jest, more info https://jestjs.io
+- $ npm install --save-dev jest
+- Update package.json from "test": "test" to "test": "jest" 
 
 ## Usage
 - Within the VSCode terminal, start MySQL
@@ -42,8 +45,8 @@ This repo contains a simplified content management system (CMS) through a comman
 - Run the application within the terminal
 -   $ npm start
 - ![invokeapp](./img/invokeapp.jpg "Start application")
-- View how to invoke the app on the terminal command-line and afterwards view the queries:
-https://drive.google.com/file/d/1PDtzf94vUY6thJZZBh_offyvXtGPE1Zn/view
+- To see how to invoke the command-line application on the terminal, and then afterwards how to view the tables via MySQL command-line, here is a quick walkthrough:
+https://drive.google.com/file/d/1q_s-Sr63_4mzcc2v2riFLAhUI81vvvyM/view 
 
 ## Technology
 Node.js, npm, Inquirer, MySQL, MySQL2, JavaScript, ES6, HTML, CSS
